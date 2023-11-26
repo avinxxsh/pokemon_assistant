@@ -48,15 +48,16 @@ shinyUI(
                         sidebarLayout(
                           sidebarPanel(
                             h2("Battle Guide"),
-                            selectInput("dropdown1", "Select Pokémon:", choices = unique(data$Name))
-                        
-               ),
-               
-               mainPanel(
-                 
+                            selectInput("selected_pokemon_battle", "Select Pokémon:", choices = unique(data$Name)),
+                            actionButton("recommend_button", "Recommend Pokémon"),
+                          ),
+                          mainPanel(
+                            textOutput("battle_recommendations"),
+                            dataTableOutput("all_pokemon_table")
+                          )
+                        )
                )
-        )
-      )
     )
   )
 )
+
