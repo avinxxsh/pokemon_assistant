@@ -2,10 +2,10 @@ source("test.R")
 source("ui.R")
 
 server <- function(input, output) {
-  data <- read.csv("data/Pokemon.csv")
-  #MODULE 1 - POKEMON SEARCH
+  # data <- read.csv("data/Pokemon.csv")
+  
+  # MODULE 1 - POKEMON SEARCH
   observeEvent(input$search_button, {
-    # Variables
     keyword <- input$search_input
     selected_category <- input$filter_category
     selected_category_2 <- input$filter_category_2
@@ -14,16 +14,14 @@ server <- function(input, output) {
     # data <- read.csv("data/Pokemon.csv")
     matched_data <- subset(data, grepl(keyword, Name, ignore.case = TRUE))
     # matched_data <- subset(data, Name %in% keyword)
-    
-    # Filter by Type
+
     if (selected_category != "None") {
       filtered_data <- matched_data[matched_data$Type2 == selected_category | 
                                       matched_data$Type1 == selected_category, ]
     } else {
       filtered_data <- matched_data
     }
-    
-    # Filter if Legendary
+
     if (selected_category_2 == "TRUE") {
       filtered_data <- filtered_data[filtered_data$Legendary == "TRUE", ]
     } else if (selected_category_2 == "FALSE") {
@@ -32,7 +30,6 @@ server <- function(input, output) {
       filtered_data <- filtered_data
     }
     
-    # Pokemon Generation Filter
     if (selected_category_3 == 1) {
       filtered_data <- filtered_data[filtered_data$Generation == 1, ]
     } else if (selected_category_3 == 2) {
@@ -48,7 +45,7 @@ server <- function(input, output) {
     } else {
       filtered_data <- filtered_data
     }
-    # Output
+
     output$search_results <- renderTable({
       if (nrow(filtered_data) > 0) {
         filtered_data
@@ -58,7 +55,7 @@ server <- function(input, output) {
     })
   })
 
-  # Boxplot
+  # MODULE 2 - BOXPLOT
   output$boxplot <- renderPlot({
     selected_pokemon <- input$selected_pokemon
     selected_statistic <- input$selected_statistic
@@ -80,9 +77,59 @@ server <- function(input, output) {
       geom_boxplot() +
       geom_point(data = combined_stats[combined_stats$Name == selected_pokemon, ],
                  aes(x = Type1, y = !!as.name(selected_statistic)), color = "red", size = 3) +
-      labs(title = paste("Statistics for", selected_pokemon, "and Average for", 
-                         unique(combined_stats$Type1), "Type"),
+      labs(title = paste("Statistics for", selected_pokemon),
            x = "Type", y = selected_statistic) +
       theme_minimal()
   })
+  colnames(type_effectiveness) <- gsub("^\\s+|\\s+$", "", colnames(type_effectiveness))
+  
+
+  getEffectiveTypes <- function(defender_type) {
+    effectiveness <- type_effectiveness[type_effectiveness$def_type == defender_type, ]
+    effective_types <- colnames(effectiveness[, effectiveness > 1])
+    return(effective_types)
+  }
+  
+  observeEvent(input$selected_pokemon_battle, {
+    selected_pokemon <- input$selected_pokemon_battle
+    print(paste("Selected Pokémon:", selected_pokemon))
+    
+    pokemon_types <- data[data$Name == selected_pokemon, c("Type1", "Type2")]
+    pokemon_types <- unlist(pokemon_types)
+    pokemon_types <- pokemon_types[!is.na(pokemon_types)]  # Remove NAs
+    print(paste("Pokémon Types:", paste(pokemon_types, collapse = ", ")))
+    
+    colnames(type_effectiveness) <- gsub("^\\s+|\\s+$", "", colnames(type_effectiveness))
+    
+    effective_types <- character(0)
+    
+    for (pokemon_type in pokemon_types) {
+      effectiveness <- type_effectiveness[type_effectiveness$def_type == pokemon_type, ]
+      effective_types <- c(effective_types, colnames(effectiveness)[effectiveness > 1 & colnames(effectiveness) != "def_type"])
+    }
+    
+    effective_types <- unique(effective_types)
+    
+    effective_types <- setdiff(effective_types, pokemon_types)
+    
+    print(paste("Effective Types:", paste(effective_types, collapse = ", ")))
+    
+    output$battle_recommendations <- renderText({
+      if (length(effective_types) > 0) {
+        paste("Recommended Pokémon types against", selected_pokemon, ":", paste(effective_types, collapse = ", "))
+      } else {
+        "No specific recommendations."
+      }
+    })
+    all_pokemon <- data[data$Type1 %in% effective_types | data$Type2 %in% effective_types, ]
+    
+    output$all_pokemon_table <- renderDataTable({
+      datatable(all_pokemon)
+    })
+  })
+
 }
+
+
+
+
