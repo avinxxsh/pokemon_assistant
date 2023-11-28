@@ -7,8 +7,9 @@ See how stats of your selected Pokémon compare with other Pokémon of the same 
 Get a better idea on which Pokémon to use for your Pokémon battles
 
 ## Run Application 
+```
 library('Shiny')
-
 shiny::runGitHub("pokemon_assistant","avinxxsh")
+```
 
 # Shinyapp.io link
