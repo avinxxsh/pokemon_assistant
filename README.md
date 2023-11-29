@@ -13,7 +13,7 @@ Get a better idea on which Pokémon to use for your Pokémon battles
 
 ## Run Application 
 ```
-library('Shiny')
+library("shiny")
 shiny::runGitHub("pokemon_assistant","avinxxsh")
 ```
 
