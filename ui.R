@@ -8,7 +8,8 @@ shinyUI(
                tabPanel("Search Database",
                         sidebarPanel(
                           h3("Pokémon Search"),
-                          textInput("search_input", "Search:"),
+                          selectInput("search_input", "Search:", 
+                                      choices = c(" ", unique(data$Name))),
                           selectInput("filter_category", "Filter by Type:", 
                                       choices = c("None", unique(data$Type1)),
                                       selected = "None"
