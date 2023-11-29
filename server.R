@@ -90,7 +90,7 @@ server <- function(input, output) {
   
   # MODULE 3 - Battle Recommendation System
   
-  observeEvent(input$selected_pokemon_battle, {
+  observeEvent(input$recommend_button, {
     selected_pokemon <- input$selected_pokemon_battle
     print(paste("Selected Pokémon:", selected_pokemon))
     
