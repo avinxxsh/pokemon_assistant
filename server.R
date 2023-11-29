@@ -1,10 +1,11 @@
-source("test.R")
+source("functions.R")
 source("ui.R")
 
 server <- function(input, output) {
   # data <- read.csv("data/Pokemon.csv")
   
   # MODULE 1 - POKEMON SEARCH
+  
   observeEvent(input$search_button, {
     keyword <- input$search_input
     selected_category <- input$filter_category
@@ -56,7 +57,9 @@ server <- function(input, output) {
   })
 
   # MODULE 2 - BOXPLOT
-  output$boxplot <- renderPlot({
+  
+  observeEvent(input$submit_button, {
+    
     selected_pokemon <- input$selected_pokemon
     selected_statistic <- input$selected_statistic
     
@@ -73,22 +76,19 @@ server <- function(input, output) {
     
     combined_stats <- rbind(average_stats, selected_pokemon_data)
     
-    ggplot(combined_stats, aes(x = Type1, y = !!as.name(selected_statistic), fill = Type1)) +
+    output$boxplot <- renderPlot({
+    
+      ggplot(combined_stats, aes(x = Type1, y = !!as.name(selected_statistic), fill = Type1)) +
       geom_boxplot() +
       geom_point(data = combined_stats[combined_stats$Name == selected_pokemon, ],
                  aes(x = Type1, y = !!as.name(selected_statistic)), color = "red", size = 3) +
       labs(title = paste("Statistics for", selected_pokemon),
            x = "Type", y = selected_statistic) +
       theme_minimal()
+    })
   })
-  colnames(type_effectiveness) <- gsub("^\\s+|\\s+$", "", colnames(type_effectiveness))
   
-
-  getEffectiveTypes <- function(defender_type) {
-    effectiveness <- type_effectiveness[type_effectiveness$def_type == defender_type, ]
-    effective_types <- colnames(effectiveness[, effectiveness > 1])
-    return(effective_types)
-  }
+  # MODULE 3 - Battle Recommendation System
   
   observeEvent(input$selected_pokemon_battle, {
     selected_pokemon <- input$selected_pokemon_battle
@@ -129,6 +129,13 @@ server <- function(input, output) {
   })
 
 }
+    
+  
+  
+  
+  
+    
+
 
 
 
