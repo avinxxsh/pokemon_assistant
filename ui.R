@@ -1,6 +1,6 @@
 # ui.R
 library(shiny)
-source("test.R")
+source("functions.R")
 
 shinyUI(
   fluidPage(
