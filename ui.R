@@ -1,9 +1,11 @@
 # ui.R
 library(shiny)
+library(shinythemes)
 source("functions.R")
 
 shinyUI(
   fluidPage(
+    theme = shinytheme("sandstone"),
     navbarPage("Pokémon Database",
                tabPanel("Search Database",
                         sidebarPanel(
