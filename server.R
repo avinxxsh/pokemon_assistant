@@ -1,3 +1,4 @@
+source("global.R")
 source("functions.R")
 source("ui.R")
 
@@ -116,7 +117,7 @@ server <- function(input, output) {
     
     output$battle_recommendations <- renderText({
       if (length(effective_types) > 0) {
-        paste("Recommended Pokémon types against", selected_pokemon, ":", paste(effective_types, collapse = ", "))
+        paste("Recommended Pokémon types against", selected_pokemon, ":\t", paste(effective_types, collapse = ", "))
       } else {
         "No specific recommendations."
       }
