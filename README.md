@@ -1,4 +1,4 @@
-# pokemon_assistant
+# Pokémon Assistant
 **Pokémon Search:**
   Search Pokémon by Name and various other filters.
   Filters include: Type, Generation and if the Pokémon is legendary or not.
