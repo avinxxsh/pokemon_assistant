@@ -5,7 +5,7 @@
   
   Dataset: https://www.kaggle.com/datasets/abcsds/pokemon/data
 
-## Functionality 
+### Functionality 
 **Pokémon Search:**
   Search Pokémon by Name and various other filters.
   Filters include: Type, Generation and if the Pokémon is legendary or not.
@@ -17,7 +17,7 @@
 **Battle Recommendation System:**
   Get a better idea on which Pokémon to use for your Pokémon battles. Currently this feature only considers type advantages and multipliers of Pokémon. The table with recommended Pokémon lets you order the Pokémon based on any of the columns.
 
-## Run Application 
+### Run Application 
 ```
 if (!require("shiny")) install.packages("shiny")
 library("shiny")
