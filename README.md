@@ -1,11 +1,12 @@
 # pokemon_assistant
 **Pokémon Search:**
 
-Search Pokémon by Name and various other filters
+Search Pokémon by Name and various other filters.
+
+Filters include: 
 
 **Pokémon Plot:**
-
-See how stats of your selected Pokémon compare with other Pokémon of the same type and other types
+    See how stats of your selected Pokémon compare with other Pokémon of the same type and other types
 
 **Battle Recommendation System:**
 
