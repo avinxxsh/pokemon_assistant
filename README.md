@@ -14,6 +14,7 @@
 
 ## Run Application 
 ```
+install.packages("shiny")
 library("shiny")
 shiny::runGitHub("pokemon_assistant","avinxxsh")
 ```
