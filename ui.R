@@ -55,7 +55,7 @@ shinyUI(
                           ),
                           mainPanel(
                             textOutput("battle_recommendations"),
-                            dataTableOutput("all_pokemon_table")
+                            DT::dataTableOutput("all_pokemon_table")
                           )
                         )
                )
