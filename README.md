@@ -7,6 +7,7 @@ Filters include:
 
 **Pokémon Plot:**
 
+    
     See how stats of your selected Pokémon compare with other Pokémon of the same type and other types
 
 **Battle Recommendation System:**
