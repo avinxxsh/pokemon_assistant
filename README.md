@@ -19,3 +19,4 @@ shiny::runGitHub("pokemon_assistant","avinxxsh")
 ```
 
 # Shinyapp.io link
+https://avinxxsh.shinyapps.io/r_shiny_project/
