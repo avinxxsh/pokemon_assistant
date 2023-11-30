@@ -10,8 +10,7 @@
   To learn more about interpreting a boxplot refer to: https://builtin.com/data-science/boxplot
 
 **Battle Recommendation System:**
-  Get a better idea on which Pokémon to use for your Pokémon battles. Currently this feature only considers type advantages and multipliers of Pokémon. The table with recommended Pokémon lets you order the Pokémon  
-  based on any of the columns.
+  Get a better idea on which Pokémon to use for your Pokémon battles. Currently this feature only considers type advantages and multipliers of Pokémon. The table with recommended Pokémon lets you order the Pokémon based on any of the columns.
 
 ## Run Application 
 ```
@@ -22,3 +21,7 @@ shiny::runGitHub("pokemon_assistant","avinxxsh")
 
 # Shinyapp.io link
 https://avinxxsh.shinyapps.io/r_shiny_project/
+
+### Resoruces and Information 
+  The dataset used consists of 721 Pokémon upto gen 6, providing details such as their name, primary and secondary types, as well as statistics like HP, Attack, Defense, Special Attack, Special Defense, and Speed
+  Dataset: https://www.kaggle.com/datasets/abcsds/pokemon/data
