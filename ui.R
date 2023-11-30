@@ -5,12 +5,12 @@ source("functions.R")
 
 shinyUI(
   fluidPage(
-    theme = shinytheme("simplex"),
+    theme = shinytheme("flatly"),
     navbarPage("Pokémon Database",
                tabPanel("Search Database",
                         sidebarPanel(
                           h3("Pokémon Search"),
-                          selectInput("search_input", "Search:", choices = unique(data$Name)),
+                          textInput("search_input", "Search:"),
                           selectInput("filter_category", "Filter by Type:", 
                                       choices = c("None", unique(data$Type1)),
                                       selected = "None"
